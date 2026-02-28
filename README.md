@@ -1,6 +1,7 @@
 # AutoPilot — Social Life on Auto-Pilot
 
 **Relationship Intelligence, Automated.**
+DEMO https://devyanshh22.github.io/social-autopilot/
 
 An AI-driven relationship intelligence dashboard that analyzes your messaging patterns, scores relationship health, detects anomalies, and generates actionable recommendations — all running client-side in the browser.
 
