@@ -75,10 +75,6 @@ Classifications:
   0-29    Dormant   🔴
 ```
 
-## Screenshots
-
-*Dashboard overview, contact cards with health scores, pipeline visualizer, relationship trend charts, AI insights panel, action queue with suggested messages, contact detail modal with chat preview.*
-
 ## Future Scope
 
 - **Real Chat API Integrations** — WhatsApp Business API, Instagram Graph API, Gmail API
