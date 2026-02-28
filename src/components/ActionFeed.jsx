@@ -6,6 +6,10 @@ import {
   Check,
   MessageCircle,
   ArrowRight,
+  ExternalLink,
+  MessageSquare,
+  Instagram,
+  Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -33,14 +37,41 @@ const priorityConfig = {
   },
 };
 
-function ActionItem({ action, onDone }) {
+const platformLinks = {
+  whatsapp: {
+    url: "https://web.whatsapp.com/",
+    label: "Open WhatsApp",
+    icon: MessageSquare,
+    color: "#25D366",
+  },
+  instagram: {
+    url: "https://www.instagram.com/direct/inbox/",
+    label: "Open Instagram",
+    icon: Instagram,
+    color: "#E1306C",
+  },
+  email: {
+    url: "https://mail.google.com/mail/u/0/#inbox?compose=new",
+    label: "Open Email",
+    icon: Mail,
+    color: "#4285F4",
+  },
+};
+
+function ActionItem({ action, onDone, platform }) {
   const [done, setDone] = useState(false);
   const config = priorityConfig[action.priority] || priorityConfig[3];
   const Icon = config.icon;
+  const platformInfo = platformLinks[platform] || platformLinks.whatsapp;
+  const PlatformIcon = platformInfo.icon;
 
   const handleDone = () => {
     setDone(true);
     onDone?.(action);
+  };
+
+  const handleOpenPlatform = () => {
+    window.open(platformInfo.url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -102,33 +133,51 @@ function ActionItem({ action, onDone }) {
             {action.reasoning}
           </p>
 
-          {/* Done Button */}
-          <button
-            onClick={handleDone}
-            disabled={done}
-            className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg transition-all ${
-              done
-                ? "bg-emerald-500/20 text-emerald-400"
-                : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50 hover:text-white"
-            }`}
-          >
-            {done ? (
-              <>
-                <Check className="w-3.5 h-3.5" /> Done
-              </>
-            ) : (
-              <>
-                Mark as Done <ArrowRight className="w-3 h-3" />
-              </>
-            )}
-          </button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Open Platform & Send Button */}
+            <button
+              onClick={handleOpenPlatform}
+              disabled={done}
+              className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg transition-all hover:brightness-125"
+              style={{
+                background: `${platformInfo.color}18`,
+                color: platformInfo.color,
+              }}
+            >
+              <PlatformIcon className="w-3.5 h-3.5" />
+              {platformInfo.label}
+              <ExternalLink className="w-3 h-3 opacity-60" />
+            </button>
+
+            {/* Mark as Done Button */}
+            <button
+              onClick={handleDone}
+              disabled={done}
+              className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg transition-all ${
+                done
+                  ? "bg-emerald-500/20 text-emerald-400"
+                  : "bg-slate-700/50 text-slate-300 hover:bg-slate-600/50 hover:text-white"
+              }`}
+            >
+              {done ? (
+                <>
+                  <Check className="w-3.5 h-3.5" /> Done
+                </>
+              ) : (
+                <>
+                  Mark as Done <ArrowRight className="w-3 h-3" />
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
   );
 }
 
-export default function ActionFeed({ actions }) {
+export default function ActionFeed({ actions, platformMap = {} }) {
   const [completedActions, setCompletedActions] = useState(new Set());
 
   const handleDone = (action) => {
@@ -160,6 +209,7 @@ export default function ActionFeed({ actions }) {
               key={`${action.contactName}-${action.type}-${i}`}
               action={action}
               onDone={handleDone}
+              platform={platformMap[action.contactName] || "whatsapp"}
             />
           ))}
         </AnimatePresence>

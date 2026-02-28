@@ -189,7 +189,12 @@ export default function Dashboard() {
       </div>
 
       {/* Action Feed */}
-      <ActionFeed actions={allActions} />
+      <ActionFeed
+          actions={allActions}
+          platformMap={Object.fromEntries(
+            contacts.map((c) => [c.metrics.contactName, c.platform])
+          )}
+        />
 
       {/* Contact Detail Modal */}
       {selectedContact && (
