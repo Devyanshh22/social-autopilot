@@ -1,4 +1,4 @@
-# AutoPilot — Social Life on Auto-Pilot
+# Socialpal — Social Life on Auto-Pilot
 
 **Relationship Intelligence, Automated.**
 DEMO https://devyanshh22.github.io/social-autopilot/
