@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.glass-strong {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* Pulse animation for pipeline nodes */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(56, 189, 248, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Score ring animation */
+@keyframes score-fill {
+  from { stroke-dashoffset: 283; }
+}
+
+.score-ring {
+  animation: score-fill 1.5s ease-out forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Chat bubble styles */
+.chat-bubble-sent {
+  background: linear-gradient(135deg, #0ea5e9, #6366f1);
+  border-radius: 18px 18px 4px 18px;
+}
+
+.chat-bubble-received {
+  background: rgba(51, 65, 85, 0.8);
+  border-radius: 18px 18px 18px 4px;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  min-height: 100vh;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
